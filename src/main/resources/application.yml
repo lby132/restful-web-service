@@ -1,2 +1,11 @@
 server:
   port: 8088
+
+logging:
+  level:
+    org:
+      springframwork: DEBUG
+
+spring:
+  message:
+    basename: messages
