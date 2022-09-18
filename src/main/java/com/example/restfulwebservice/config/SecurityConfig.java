@@ -1,10 +1,12 @@
 package com.example.restfulwebservice.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -23,6 +25,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("lby")
                 .password("{noop}test1234")
                 .roles("USER");
+    }
+
+    //WebSecurityConfigurerAdapter 사용하지 않고 쓰는 법
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().antMatchers("/h2-console/**");
     }
 
 }
