@@ -6,16 +6,26 @@ logging:
     org:
       springframwork: DEBUG
 
-spring:
-  message:
-    basename: messages
-  security:
-    user:
-      name: username
-      password: passw0rd
+#spring:
+#  message:
+#    basename: messages
+#  security:
+#    user:
+#      name: username
+#      password: passw0rd
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+  jpa:
+    show-sql: true
+    defer-datasource-initialization: true
+  h2:
+    console:
+      enabled: true

@@ -20,13 +20,13 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<User> retrieveAllUsers() {
+    public List<UserInfo> retrieveAllUsers() {
         return service.findAll();
     }
 
     @GetMapping("/users/{id}")
-    public EntityModel<User> retrieveUser(@PathVariable int id) {
-        final User user = service.findOne(id);
+    public EntityModel<UserInfo> retrieveUser(@PathVariable int id) {
+        final UserInfo user = service.findOne(id);
 
         if (user == null) {
             throw new UserNotFoundException(String.format("ID[%s] not found", id));
@@ -35,7 +35,7 @@ public class UserController {
         // HATEOAS
         // "all-users", SERVER_PATH + "/users"
         // retieveAllUsers
-        final EntityModel<User> model = EntityModel.of(user);
+        final EntityModel<UserInfo> model = EntityModel.of(user);
         WebMvcLinkBuilder linkTo = WebMvcLinkBuilder.linkTo(                        // 어떤 링크를 추가할지
                 WebMvcLinkBuilder.methodOn(this.getClass()).retrieveAllUsers());    // methodOn은 현재 클래스에 있는 retrieveAllUsers()를 추가하겠다는 것.
         model.add(linkTo.withRel("all-users"));                                     // all-users라는 url과 연결을 시킨다.
@@ -44,8 +44,8 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-        User saveUser = service.save(user);
+    public ResponseEntity<UserInfo> createUser(@Valid @RequestBody UserInfo user) {
+        UserInfo saveUser = service.save(user);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -57,7 +57,7 @@ public class UserController {
 
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable int id) {
-        final User user = service.deleteById(id);
+        final UserInfo user = service.deleteById(id);
 
         if (user == null) {
             throw new UserNotFoundException(String.format("ID[%s] not found", id));

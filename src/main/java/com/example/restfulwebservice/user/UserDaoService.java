@@ -9,21 +9,21 @@ import java.util.List;
 
 @Service
 public class UserDaoService {
-    private static List<User> users = new ArrayList<>();
+    private static List<UserInfo> users = new ArrayList<>();
 
     private static int userCount = 3;
 
     static {
-        users.add(new User(1, "Kenneth", new Date(), "pass1", "701010-1111111"));
-        users.add(new User(2, "Alice", new Date(), "pass2", "801010-2222222"));
-        users.add(new User(3, "Elena", new Date(), "pass3", "901010-1111111"));
+        users.add(new UserInfo(1, "Kenneth", new Date(), "pass1", "701010-1111111"));
+        users.add(new UserInfo(2, "Alice", new Date(), "pass2", "801010-2222222"));
+        users.add(new UserInfo(3, "Elena", new Date(), "pass3", "901010-1111111"));
     }
 
-    public List<User> findAll() {
+    public List<UserInfo> findAll() {
         return users;
     }
 
-    public User save(User user) {
+    public UserInfo save(UserInfo user) {
         if (user.getId() == null) {
             user.setId(++userCount);
         }
@@ -32,8 +32,8 @@ public class UserDaoService {
         return user;
     }
 
-    public User findOne(int id) {
-        for (User user : users) {
+    public UserInfo findOne(int id) {
+        for (UserInfo user : users) {
             if (user.getId() == id) {
                 return user;
             }
@@ -42,11 +42,11 @@ public class UserDaoService {
         return null;
     }
 
-    public User deleteById(int id) {
-        Iterator<User> iterator = users.iterator();
+    public UserInfo deleteById(int id) {
+        Iterator<UserInfo> iterator = users.iterator();
 
         while (iterator.hasNext()) {
-            final User user = iterator.next();
+            final UserInfo user = iterator.next();
 
             if (user.getId() == id) {
                 iterator.remove();
