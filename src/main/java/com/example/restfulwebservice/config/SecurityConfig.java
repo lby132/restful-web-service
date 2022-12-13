@@ -11,13 +11,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Override
-//    //스프링 시큐리티적용한 상태에서 h2-console을 접속하기 위한 메소드
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeHttpRequests().antMatchers("/h2-console/**").permitAll();
-//        http.csrf().disable();
-//        http.headers().frameOptions().disable();
-//    }
+    @Override
+    //스프링 시큐리티적용한 상태에서 h2-console을 접속하기 위한 메소드
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests().antMatchers("/h2-console/**").permitAll();
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
+    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -29,9 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //스프링 시큐리티적용한 상태에서 h2-console을 접속하기 위한 메소드
     // WebSecurityConfigurerAdapter deprecated되어서 대처법
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/h2-console/**");
-    }
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//        return (web) -> web.ignoring().antMatchers("/h2-console/**");
+//    }
 
 }
